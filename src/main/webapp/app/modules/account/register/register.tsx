@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ValidatedField, ValidatedForm, isEmail } from 'react-jhipster';
 import { Row, Col, Alert, Button } from 'reactstrap';
 import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 
 import PasswordStrengthBar from 'app/shared/layout/password/password-strength-bar';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
@@ -10,7 +11,7 @@ import { handleRegister, reset } from './register.reducer';
 export const RegisterPage = () => {
   const [password, setPassword] = useState('');
   const dispatch = useAppDispatch();
-
+  const history = useHistory();
   useEffect(
     () => () => {
       dispatch(reset());
@@ -20,6 +21,7 @@ export const RegisterPage = () => {
 
   const handleValidSubmit = ({ username, email, firstPassword }) => {
     dispatch(handleRegister({ login: username, email, password: firstPassword, langKey: 'en' }));
+    history.push('/');
   };
 
   const updatePassword = event => setPassword(event.target.value);
