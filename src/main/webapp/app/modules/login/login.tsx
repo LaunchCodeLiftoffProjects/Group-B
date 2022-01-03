@@ -23,7 +23,7 @@ export const Login = (props: RouteComponentProps<any>) => {
   //  return <LoginModal showModal={showModal} handleLogin={handleLogin} handleClose={handleClose} loginError={loginError} />;
   return (
     <div>
-      <LoginForm handleLogin={handleLogin} loginError={loginError} />;
+      <LoginForm handleLogin={handleLogin} loginError={loginError} />
     </div>
   );
 };
