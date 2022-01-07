@@ -16,7 +16,11 @@ export const Home = () => {
   if (!account?.login) {
     return <Redirect to="/login" />;
   }
-  return <SearchBar action="http://www.google.com/search?"></SearchBar>;
+  return (
+    <div>
+      <SearchBar action="http://www.google.com/search?"></SearchBar>
+    </div>
+  );
 };
 
 export default Home;

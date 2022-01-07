@@ -61,11 +61,13 @@ const LoginForm = (props: ILoginFormProps) => {
         </Col>
       </Row>
       <div className="mt-1">&nbsp;</div>
+      {/* 
       <Alert color="warning">
         <Link to="/account/reset/request" data-cy="forgetYourPasswordSelector">
           Did you forget your password?
         </Link>
       </Alert>
+      */}
       <Alert color="warning">
         <span>You don&apos;t have an account yet?</span> <Link to="/account/register">Register a new account</Link>
       </Alert>
