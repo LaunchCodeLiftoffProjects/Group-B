@@ -1,4 +1,5 @@
 import React from 'react';
+import { Row, Col, Alert } from 'reactstrap';
 
 export interface ISearchBarProps {
   action: string;
@@ -9,7 +10,9 @@ export const SearchBar = (props: ISearchBarProps) => {
     <div>
       <form action={props.action}>
         <input type="text" name="q"></input>
-        <input type="submit"></input>
+        <button type="submit" className="btn btn-primary">
+          Search
+        </button>
       </form>
     </div>
   );
