@@ -10,6 +10,7 @@ import { useAppSelector } from 'app/config/store';
 
 import SearchBar from '../components/search_bar/search_bar';
 import WidgetList from '../components/widget_list/widget_list';
+import WidgetContainer from '../components/widget_container/widget_container';
 
 export const Home = () => {
   const account = useAppSelector(state => state.authentication.account);
