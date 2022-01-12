@@ -10,6 +10,7 @@ export const initialState = {
   loginSuccess: false,
   loginError: false, // Errors returned from server side
   showModalLogin: false,
+  showAddModal: false,
   account: {} as any,
   errorMessage: null as unknown as string, // Errors returned from server side
   redirectMessage: null as unknown as string,
