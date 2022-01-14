@@ -14,18 +14,14 @@ import WidgetContainer from '../components/widget_container/widget_container';
 
 export const Home = () => {
   const account = useAppSelector(state => state.authentication.account);
+  const widgets = useAppSelector(state => state.widget.entities);
 
   if (!account?.login) {
     return <Redirect to="/login" />;
   }
   return (
     <div>
-      <WidgetList
-        widgets={[
-          <SearchBar action="http://www.google.com/search?" key={1}></SearchBar>,
-          <SearchBar action="https://www.bing.com/search?" key={2}></SearchBar>,
-        ]}
-      ></WidgetList>
+      <WidgetList widgets={widgets}></WidgetList>
     </div>
   );
 };
