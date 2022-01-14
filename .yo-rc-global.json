@@ -1,8 +1,0 @@
-{
-  "generator-jhipster:7.4.1": {
-    "promptValues": {
-      "packageName": "org.launchcode.customhomepage",
-      "nativeLanguage": "en"
-    }
-  }
-}
