@@ -9,6 +9,8 @@ import { Row, Col, Alert } from 'reactstrap';
 import { useAppSelector } from 'app/config/store';
 
 import SearchBar from '../components/search_bar/search_bar';
+import WidgetList from '../components/widget_list/widget_list';
+import WidgetContainer from '../components/widget_container/widget_container';
 
 export const Home = () => {
   const account = useAppSelector(state => state.authentication.account);
@@ -18,7 +20,12 @@ export const Home = () => {
   }
   return (
     <div>
-      <SearchBar action="http://www.google.com/search?"></SearchBar>
+      <WidgetList
+        widgets={[
+          <SearchBar action="http://www.google.com/search?" key={1}></SearchBar>,
+          <SearchBar action="https://www.bing.com/search?" key={2}></SearchBar>,
+        ]}
+      ></WidgetList>
     </div>
   );
 };
