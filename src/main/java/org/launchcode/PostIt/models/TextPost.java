@@ -1,5 +1,8 @@
 package org.launchcode.PostIt.models;
 
+import javax.persistence.Entity;
+
+@Entity
 public class TextPost extends AbstractPost{
     //add validation
     private String body;
@@ -7,8 +10,8 @@ public class TextPost extends AbstractPost{
     public TextPost(){
     }
 
-    public TextPost(String title, String body){
-        super(title);
+    public TextPost(String title, String body, Boolean anon){
+        super(title, anon);
         this.body = body;
     }
 
