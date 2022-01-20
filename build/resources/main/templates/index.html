@@ -7,7 +7,17 @@
 <div th:replace="fragments :: page-header"></div>
 
 <div class="container body-content">
-    <h2>Test</h2>
+    <h2>Post it!</h2>
+    <a href="/post">Make a post</a>
+    <div>
+        <th:block th:each="post : ${posts}">
+            <div>
+                <h2 th:text="${post.title}"></h2>
+                <p th:text="${post.body}"></p>
+                <p th:text="${post.user.username}"></p>
+            </div>
+        </th:block>
+    </div>
 
 
 </div>
