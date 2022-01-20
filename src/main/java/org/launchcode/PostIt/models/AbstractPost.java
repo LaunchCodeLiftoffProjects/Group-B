@@ -44,6 +44,14 @@ public abstract class AbstractPost {
         return id;
     }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Date getDate() {
         return date;
     }
