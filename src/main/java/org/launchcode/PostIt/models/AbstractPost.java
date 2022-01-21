@@ -21,15 +21,18 @@ public abstract class AbstractPost {
 
     private Boolean anonymous;
 
+    private String type;
+
     @ManyToOne
     User user;
 
     public AbstractPost (){
     }
-    public AbstractPost(String title, Boolean anon){
+    public AbstractPost(String title, Boolean anon, String type){
         this.title = title;
         this.date = new Date();
         this.anonymous = anon;
+        this.type= type;
     }
 
     public String getTitle() {
@@ -66,6 +69,14 @@ public abstract class AbstractPost {
 
     public User getUser() {
         return user;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override

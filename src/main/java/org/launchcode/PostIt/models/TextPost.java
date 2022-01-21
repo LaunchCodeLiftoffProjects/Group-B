@@ -11,7 +11,7 @@ public class TextPost extends AbstractPost{
     }
 
     public TextPost(String title, String body, Boolean anon){
-        super(title, anon);
+        super(title, anon, "text");
         this.body = body;
     }
 
