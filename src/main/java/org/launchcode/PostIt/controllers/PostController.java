@@ -29,7 +29,12 @@ public class PostController {
     @PostMapping("/post")
     public String submitPost(@ModelAttribute TextPostFormDTO textPostFormDTO, HttpSession session){
         TextPost newTextPost = new TextPost(textPostFormDTO.getTitle(), textPostFormDTO.getBody(), textPostFormDTO.getAnonymous());
+        if(textPostFormDTO.getAnonymous() == null){
+            newTextPost.setAnonymous(false);
+        }
+
+        newTextPost.setUser(authenticationController.getUserFromSession(session));
         postRepository.save(newTextPost);
-        return "index";
+        return "redirect:";
     }
 }

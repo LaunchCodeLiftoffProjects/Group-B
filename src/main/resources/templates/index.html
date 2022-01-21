@@ -11,10 +11,15 @@
     <a href="/post">Make a post</a>
     <div>
         <th:block th:each="post : ${posts}">
-            <div>
+            <div th:if="${!post.anonymous}">
                 <h2 th:text="${post.title}"></h2>
                 <p th:text="${post.body}"></p>
                 <p th:text="${post.user.username}"></p>
+            </div>
+            <div th:if="${post.anonymous}">
+                <h2 th:text="${post.title}"></h2>
+                <p th:text="${post.body}"></p>
+                <p>Anonymously Posted</p>
             </div>
         </th:block>
     </div>

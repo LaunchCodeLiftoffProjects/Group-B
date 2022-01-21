@@ -60,6 +60,10 @@ public abstract class AbstractPost {
         return anonymous;
     }
 
+    public void setAnonymous(Boolean anonymous) {
+        this.anonymous = anonymous;
+    }
+
     public User getUser() {
         return user;
     }
