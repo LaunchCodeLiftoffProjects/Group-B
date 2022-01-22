@@ -25,6 +25,8 @@ public class IndexController {
         //TODO Sort posts by date
         List<AbstractPost> posts = new ArrayList<>();
         posts.addAll((Collection<? extends AbstractPost>) postRepository.findAll());
+        //add image posts repo to posts
+
         model.addAttribute("posts", posts);
         return "index";
     }
