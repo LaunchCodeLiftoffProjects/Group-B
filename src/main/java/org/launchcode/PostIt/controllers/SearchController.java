@@ -28,8 +28,7 @@ public class SearchController {
     public String returnSearchedString(@RequestParam String postSearch, Error errors, Model model) {
         List<TextPost> posts = (List<TextPost>) postRepository.findAll();
         List<TextPost> returnedPosts = new ArrayList<>();
-        for( TextPost post : posts) {
-
+        for(TextPost post : posts) {
             if (post.getTitle().toLowerCase().contains(postSearch.toLowerCase()) || post.getBody().toLowerCase().contains(postSearch.toLowerCase()) || post.getUser().getUsername().toLowerCase().contains(postSearch.toLowerCase())) {
                 returnedPosts.add(post);
             }
