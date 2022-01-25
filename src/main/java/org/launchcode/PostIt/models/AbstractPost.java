@@ -5,11 +5,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Objects;
 
 @MappedSuperclass
-public abstract class AbstractPost {
+public abstract class AbstractPost implements Comparable<AbstractPost>{
     @Id
     @GeneratedValue
     private int id;
@@ -21,16 +22,20 @@ public abstract class AbstractPost {
 
     private Boolean anonymous;
 
+    private String type;
+
     @ManyToOne
     User user;
 
     public AbstractPost (){
     }
-    public AbstractPost(String title, Boolean anon){
+    public AbstractPost(String title, Boolean anon, String type){
         this.title = title;
         this.date = new Date();
         this.anonymous = anon;
+        this.type= type;
     }
+
 
     public String getTitle() {
         return title;
@@ -68,6 +73,19 @@ public abstract class AbstractPost {
         return user;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    @Override
+    public int compareTo(AbstractPost post){
+        return getDate().compareTo(post.getDate());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,3 +99,5 @@ public abstract class AbstractPost {
         return Objects.hash(id);
     }
 }
+
+
