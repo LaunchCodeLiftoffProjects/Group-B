@@ -2,6 +2,8 @@ package org.launchcode.PostIt.models;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,7 +36,7 @@ public class ImgurAPI {
     }
 
 
-    public static uploadImage(/*Something*/) {
+    public static uploadImage(@RequestParam("image") MultipartFile[] image) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://api.imgur.com/3/upload"))
                 .timeout(Duration.ofMinutes(1))

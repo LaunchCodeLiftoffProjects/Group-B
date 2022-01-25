@@ -12,8 +12,11 @@
         </label>
     </div>
     <div class="form-group">
-        <label>Body
-            <input type="text" name="body" class="form-control">
+        <label>Picture
+            <form action="/upload" method="post" enctype="multipart/form-data">
+
+                <input type="file" name="image" accept="image/jpeg, image/png">
+            </form>
         </label>
     </div>
     <div class="form-group">
