@@ -1,52 +1,37 @@
 package org.launchcode.PostIt.models;
 
 import org.apache.tomcat.util.codec.binary.Base64;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.net.URI;
+import java.io.*;
 import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.time.Duration;
-import java.util.concurrent.CompletableFuture;
 
 public class ImgurAPI {
 
     HttpClient client = HttpClient.newHttpClient();
 
-    public static getImage(String clientId) throws Exception {
+    public static String uploadImage(@RequestParam("image") MultipartFile image) {
 
+        return "index";
 
-    HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create("https://api.imgur.com/3/image{{imageHash}}"))
-            .timeout(Duration.ofMinutes(1))
-            .header("Authorization", "Client-ID {{clientId}}")
-            .GET()
-            .build();
-    // Async response handler
-        CompletableFuture<HttpResponse<String>> response = HttpClient.newBuilder()
-                .build()
-                .sendAsync(request, HttpResponse.BodyHandlers.ofString());
-
-        return /* Something */;
-    }
-
-
-    public static uploadImage(@RequestParam("image") MultipartFile[] image) {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://api.imgur.com/3/upload"))
-                .timeout(Duration.ofMinutes(1))
-                .header(/*header info*/)
-                .POST()
-                .build();
-        // Async response handler
-        CompletableFuture<HttpResponse<String>> response = HttpClient.newBuilder()
-                .build()
-                .sendAsync(request, HttpResponse.BodyHandlers.ofString());
+//        HttpRequest request = HttpRequest.newBuilder()
+//                .uri(URI.create("https://api.imgur.com/3/upload"))
+//                .timeout(Duration.ofMinutes(1))
+//                .header("Authorization", "Client-ID {{clientId}}")
+//                .POST(HttpRequest.BodyPublishers.ofInputStream(() -> {
+//                    try {
+//                        return new ByteArrayInputStream(image.getInputStream());
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//                ))
+//                .build();
+//        // Async response handler
+//        CompletableFuture<HttpResponse<String>> response = HttpClient.newBuilder()
+//                .build()
+//                .sendAsync(request, HttpResponse.BodyHandlers.ofString());
 
     }
 
