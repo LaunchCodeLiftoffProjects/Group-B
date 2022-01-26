@@ -19,6 +19,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class ImgurAPI {
     HttpClient client = HttpClient.newHttpClient();
+    public static final String CLIENTID = System.getenv("CLIENTID");
 
     public static String uploadImage(MultipartFile image) {
 
@@ -38,7 +39,7 @@ public class ImgurAPI {
         Request request = new Request.Builder()
                 .url("https://api.imgur.com/3/image")
                 .method("POST", body)
-                .addHeader("Authorization", "Client-ID d9e603a5e9dfbff")
+                .addHeader("Authorization", "Client-ID " + CLIENTID)
                 .build();
         try {
             Response response = client.newCall(request).execute();
