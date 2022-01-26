@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body>
+<div th:replace="fragments :: page-header"></div>
+<h3>Make a Post</h3>
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label>Title
+            <input type ="text" name="title" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Picture
+                <input type="file" name="image" accept="image/jpeg, image/png">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Anonymous?
+            <input type="checkbox" name ="anonymous" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Post" class="btn btn-success">
+    </div>
+</form>
+</body>
+</html>
