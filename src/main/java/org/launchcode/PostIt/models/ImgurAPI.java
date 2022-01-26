@@ -38,7 +38,10 @@ public class ImgurAPI {
                 .build();
         try {
             Response response = client.newCall(request).execute();
+            String responseBody = response.body().string();
+            //String imgUrl = responseBody.substring(responseBody.indexOf("link") + 6, responseBody.indexOf(".jpeg") + 4);
             Boolean debug = response.isSuccessful();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
