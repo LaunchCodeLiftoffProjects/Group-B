@@ -1,7 +1,10 @@
 package org.launchcode.PostIt.models;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.*;
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.launchcode.PostIt.models.dto.ImgurResponse;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,9 +20,10 @@ import java.util.concurrent.CompletableFuture;
 public class ImgurAPI {
     HttpClient client = HttpClient.newHttpClient();
 
-    public static void uploadImage(MultipartFile image) {
+    public static String uploadImage(MultipartFile image) {
 
         String encodedImage = "";
+        String imgUrl = "";
         try {
             encodedImage = multiEncodeFileToBase64Binary(image);
         } catch (Exception e) {
@@ -39,70 +43,18 @@ public class ImgurAPI {
         try {
             Response response = client.newCall(request).execute();
             String responseBody = response.body().string();
-            //String imgUrl = responseBody.substring(responseBody.indexOf("link") + 6, responseBody.indexOf(".jpeg") + 4);
-            Boolean debug = response.isSuccessful();
+            ObjectMapper mapper = new ObjectMapper()
+                    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            ImgurResponse imgResponse = mapper.readValue(responseBody, ImgurResponse.class);
+            imgUrl = imgResponse.getData().getLink();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        byte[] imageByte = new byte[0];
-//        try {
-//            imageByte = image.getBytes();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        String postBody = null;
-//        try {
-//            postBody = "image: " + multiEncodeFileToBase64Binary(image);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        //File imageFile = new File("src/main/resources/tempImage.tmp");
-//
-//
-////        for(byte x : imageByte){
-////            postBody+= x;
-////        }
-////        ArrayList<Byte> postBytes = new ArrayList<>();
-////        for(byte x : postBody.getBytes()){
-////            postBytes.add(x);
-////        }
-////        for(byte t : imageByte){
-////            postBytes.add(t);
-////        }
-////        byte postBodyByteArr[] = new byte[postBytes.size()];
-////        for(int i = 0; i < postBytes.size(); i++){
-////            postBodyByteArr[i] = postBytes.get(i);
-////        }
-//        HttpRequest request = HttpRequest.newBuilder()
-//                .uri(URI.create("https://api.imgur.com/3/image"))
-//                .timeout(Duration.ofMinutes(1))
-//                .header("Authorization", "Client-ID d9e603a5e9dfbff")
-//                .header("Content-Type", "multipart/form-data; charset=utf-8; boundary='another cool boundary'")
-//                .POST()
-//                .build();
-//        // response handler
-//        HttpResponse<String> response = null;
-//        try {
-//            response = HttpClient.newBuilder()
-//                    .build()
-//                    .send(request, HttpResponse.BodyHandlers.ofString());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        String code = response.toString();
-//        //return
+        return imgUrl;
+
     }
 
-    private static String encodeFileToBase64Binary(File file) throws Exception{
-        FileInputStream fileInputStreamReader = new FileInputStream(file);
-        byte[] bytes = new byte[(int)file.length()];
-        fileInputStreamReader.read(bytes);
-        return new String(Base64.encodeBase64(bytes), "UTF-8");
-    }
     private static String multiEncodeFileToBase64Binary(MultipartFile file) throws Exception{
         FileInputStream fileInputStreamReader = (FileInputStream) file.getInputStream();
         byte[] bytes = new byte[(int)file.getSize()];

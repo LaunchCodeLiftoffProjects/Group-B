@@ -58,7 +58,7 @@ public class PostController {
             newImagePost.setAnonymous(false);
         }
 
-        ImgurAPI.uploadImage(imagePostDTO.getImage());
+        newImagePost.setUrl(ImgurAPI.uploadImage(imagePostDTO.getImage()));
         newImagePost.setUser(authenticationController.getUserFromSession(session));
         imagePostRepository.save(newImagePost);
         return "redirect:";
