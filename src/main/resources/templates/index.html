@@ -8,7 +8,6 @@
 
 <div class="container body-content">
     <h2>Post it!</h2>
-    <a href="/post">Make a post</a>
     <div>
         <th:block th:each="post : ${posts}">
             <th:block th:if="${post.type == 'text'}">

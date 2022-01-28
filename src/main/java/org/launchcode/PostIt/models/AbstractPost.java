@@ -83,7 +83,7 @@ public abstract class AbstractPost implements Comparable<AbstractPost>{
 
     @Override
     public int compareTo(AbstractPost post){
-        return getDate().compareTo(post.getDate());
+        return getDate().compareTo(post.getDate()) * -1;
     }
 
     @Override
