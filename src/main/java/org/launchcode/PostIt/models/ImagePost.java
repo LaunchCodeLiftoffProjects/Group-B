@@ -1,9 +1,12 @@
 package org.launchcode.PostIt.models;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class ImagePost extends AbstractPost{
+
+    @NotNull
     private String url;
 
     public ImagePost(){};
