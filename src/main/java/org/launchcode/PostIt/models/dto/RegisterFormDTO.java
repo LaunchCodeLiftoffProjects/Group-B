@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 public class RegisterFormDTO extends LoginFormDTO {
 
     @NotNull
-    @NotBlank(message = "Field must be filled.")
+    @NotBlank
     private String verifyPassword;
 
     public String getVerifyPassword() {

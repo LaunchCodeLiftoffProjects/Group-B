@@ -2,11 +2,12 @@ package org.launchcode.PostIt.models.dto;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class TextPostFormDTO extends PostFormDTO{
 
     @NotNull
-    @Max(value = 2000, message = "Maximum of 2,000 characters.")
+    @Size(max = 2000, message = "Maximum of 2,000 characters.")
     private String body;
 
     public String getBody() {
