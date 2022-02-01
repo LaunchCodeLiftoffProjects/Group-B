@@ -77,6 +77,10 @@ public abstract class AbstractPost implements Comparable<AbstractPost>{
         return type;
     }
 
+    public String getFormattedDate(){
+        return this.date.toString();
+    }
+
     public void setType(String type) {
         this.type = type;
     }
