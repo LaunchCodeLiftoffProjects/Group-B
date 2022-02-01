@@ -6,7 +6,6 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class ImagePost extends AbstractPost{
 
-    @NotNull
     private String url;
 
     public ImagePost(){};
