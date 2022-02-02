@@ -70,7 +70,7 @@ public class PostController {
                                   Errors errors, Model model, HttpSession session){
 
         if (errors.hasErrors()) {
-            model.addAttribute("url", "ImagePost");
+            model.addAttribute("title", "ImagePost");
             return "postImage";
         }
 
@@ -81,7 +81,13 @@ public class PostController {
 
         newImagePost.setUrl(ImgurAPI.uploadImage(imagePostDTO.getImage()));
         newImagePost.setUser(authenticationController.getUserFromSession(session));
-        imagePostRepository.save(newImagePost);
-        return "redirect:";
+
+        if (newImagePost.getUrl().equals("error")){
+            model.addAttribute("title", "ImagePost");
+            return "postImage";
+        }else{
+            imagePostRepository.save(newImagePost);
+            return "redirect:";
+        }
     }
 }

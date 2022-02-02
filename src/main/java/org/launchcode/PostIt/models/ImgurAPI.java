@@ -21,9 +21,11 @@ public class ImgurAPI {
     HttpClient client = HttpClient.newHttpClient();
 
     public static String uploadImage(MultipartFile image) {
-
         String encodedImage = "";
         String imgUrl = "";
+
+
+
         try {
             encodedImage = multiEncodeFileToBase64Binary(image);
         } catch (Exception e) {
@@ -43,10 +45,19 @@ public class ImgurAPI {
         try {
             Response response = client.newCall(request).execute();
             String responseBody = response.body().string();
-            ObjectMapper mapper = new ObjectMapper()
-                    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-            ImgurResponse imgResponse = mapper.readValue(responseBody, ImgurResponse.class);
-            imgUrl = imgResponse.getData().getLink();
+
+                ObjectMapper mapper = new ObjectMapper()
+                        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+                ImgurResponse imgResponse = mapper.readValue(responseBody, ImgurResponse.class);
+
+                Boolean debug = response.isSuccessful();
+                if (response.isSuccessful()) {
+                    imgUrl = imgResponse.getData().getLink();
+                }else{
+                    imgUrl="error";
+                    return imgUrl;
+                }
+
 
         } catch (IOException e) {
             e.printStackTrace();

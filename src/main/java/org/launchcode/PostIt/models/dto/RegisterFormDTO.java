@@ -5,8 +5,6 @@ import javax.validation.constraints.NotNull;
 
 public class RegisterFormDTO extends LoginFormDTO {
 
-    @NotNull
-    @NotBlank
     private String verifyPassword;
 
     public String getVerifyPassword() {
