@@ -10,11 +10,13 @@
         <label>Title
             <input type ="text" name="title" class="form-control">
         </label>
+        <p class="errors" th:errors="${imagePostDTO.title}"></p>
     </div>
     <div class="form-group">
         <label>Picture
                 <input type="file" name="image" accept="image/jpeg, image/png">
         </label>
+        <p class="errors" th:text="${errorUrl}"></p>
     </div>
     <div class="form-group">
         <label>Anonymous?

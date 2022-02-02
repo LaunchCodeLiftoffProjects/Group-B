@@ -5,26 +5,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.*;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.launchcode.PostIt.models.dto.ImgurResponse;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.concurrent.CompletableFuture;
+
 
 public class ImgurAPI {
-    HttpClient client = HttpClient.newHttpClient();
+
     public static final String CLIENTID = System.getenv("CLIENTID");
 
     public static String uploadImage(MultipartFile image) {
 
         String encodedImage = "";
         String imgUrl = "";
+
         try {
             encodedImage = multiEncodeFileToBase64Binary(image);
         } catch (Exception e) {
@@ -44,14 +38,22 @@ public class ImgurAPI {
         try {
             Response response = client.newCall(request).execute();
             String responseBody = response.body().string();
-            ObjectMapper mapper = new ObjectMapper()
-                    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-            ImgurResponse imgResponse = mapper.readValue(responseBody, ImgurResponse.class);
-            imgUrl = imgResponse.getData().getLink();
 
+                ObjectMapper mapper = new ObjectMapper()
+                        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+                ImgurResponse imgResponse = mapper.readValue(responseBody, ImgurResponse.class);
+
+                Boolean debug = response.isSuccessful();
+                if (response.isSuccessful()) {
+                    imgUrl = imgResponse.getData().getLink();
+                }else{
+                    imgUrl="error";
+                    return imgUrl;
+                }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return imgUrl;
 
     }

@@ -1,10 +1,13 @@
 package org.launchcode.PostIt.models.dto;
 
 public class imgurDataResponse {
+
     private String link;
+
     private String deletehash;
 
     public imgurDataResponse(){};
+
     public imgurDataResponse(String link, String deletehash) {
         this.link = link;
         this.deletehash = deletehash;

@@ -6,9 +6,12 @@ import org.launchcode.PostIt.models.TextPost;
 import org.launchcode.PostIt.models.data.ImagePostRepository;
 import org.launchcode.PostIt.models.data.PostRepository;
 import org.launchcode.PostIt.models.dto.ImagePostDTO;
+import org.launchcode.PostIt.models.dto.RegisterFormDTO;
 import org.launchcode.PostIt.models.dto.TextPostFormDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.Date;
 
 @Controller
@@ -30,13 +34,21 @@ public class PostController {
     AuthenticationController authenticationController;
 
     @GetMapping("/post")
-    public String postForm(){
+    public String postForm(Model model){
+        model.addAttribute(new TextPostFormDTO());
         return "post";
     }
 
-    //TODO add validation
+
     @PostMapping("/post")
-    public String submitPost(@ModelAttribute TextPostFormDTO textPostFormDTO, HttpSession session){
+    public String submitPost(@ModelAttribute @Valid TextPostFormDTO textPostFormDTO, Errors errors,
+                             Model model, HttpSession session){
+
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Post");
+            return "post";
+        }
+
         TextPost newTextPost = new TextPost(textPostFormDTO.getTitle(), textPostFormDTO.getBody(), textPostFormDTO.getAnonymous());
         if(textPostFormDTO.getAnonymous() == null){
             newTextPost.setAnonymous(false);
@@ -48,11 +60,20 @@ public class PostController {
     }
 
     @GetMapping("/postImage")
-    public String postImage() {return "postImage";}
+    public String postImage(Model model) {
+        model.addAttribute(new ImagePostDTO());
+        return "postImage";}
 
 
     @PostMapping("/postImage")
-    public String submitImagePost(@ModelAttribute ImagePostDTO imagePostDTO, HttpSession session){
+    public String submitImagePost(@ModelAttribute @Valid ImagePostDTO imagePostDTO,
+                                  Errors errors, Model model, HttpSession session){
+
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "ImagePost");
+            return "postImage";
+        }
+
         ImagePost newImagePost = new ImagePost(imagePostDTO.getTitle(), imagePostDTO.getUrl(), imagePostDTO.getAnonymous());
         if(imagePostDTO.getAnonymous() == null){
             newImagePost.setAnonymous(false);
@@ -60,7 +81,14 @@ public class PostController {
 
         newImagePost.setUrl(ImgurAPI.uploadImage(imagePostDTO.getImage()));
         newImagePost.setUser(authenticationController.getUserFromSession(session));
-        imagePostRepository.save(newImagePost);
-        return "redirect:";
+
+        if (newImagePost.getUrl().equals("error")){
+            model.addAttribute("title", "ImagePost");
+            model.addAttribute("errorUrl","Must have Image to upload.");
+            return "postImage";
+        }else{
+            imagePostRepository.save(newImagePost);
+            return "redirect:";
+        }
     }
 }
