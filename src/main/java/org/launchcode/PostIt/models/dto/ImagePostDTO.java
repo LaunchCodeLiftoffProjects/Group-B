@@ -2,9 +2,8 @@ package org.launchcode.PostIt.models.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-
 public class ImagePostDTO extends PostFormDTO{
+
     private String url;
 
     private MultipartFile image;
