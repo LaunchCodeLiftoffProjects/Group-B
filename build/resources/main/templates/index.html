@@ -13,24 +13,24 @@
         <th:block th:each="post : ${posts}">
             <th:block th:if="${post.type == 'text'}">
                 <div th:if="${!post.anonymous}">
-                    <h2 th:text="${post.title}"></h2>
+                    <a th:text="${post.title}" th:href="@{'/edit/' + ${post.getId()}}" style="font-size: 30px"></a>
                     <p th:text="${post.body}"></p>
                     <p th:text="${post.user.username}"></p>
                 </div>
                 <div th:if="${post.anonymous}">
-                    <h2 th:text="${post.title}"></h2>
+                    <a th:text="${post.title}" th:href="@{'/edit/' + ${post.getId()}}" style="font-size: 30px"></a>
                     <p th:text="${post.body}"></p>
                     <p>Anonymously Posted</p>
                 </div>
             </th:block>
             <th:block th:if="${post.type == 'image'}">
                 <div th:if="${!post.anonymous}">
-                    <h2 th:text="${post.title}"></h2>
+                    <a th:text="${post.title}" th:href="@{'/edit/' + ${post.getId()}}" style="font-size: 30px"></a>
                     <img th:src="${post.url}"/>
                     <p th:text="${post.user.username}"></p>
                 </div>
                 <div th:if="${post.anonymous}">
-                    <h2 th:text="${post.title}"></h2>
+                    <a th:text="${post.title}" th:href="@{'/edit/' + ${post.getId()}}" style="font-size: 30px"></a>
                     <img th:src="${post.url}"/>
                     <p>Anonymously Posted</p>
                 </div>

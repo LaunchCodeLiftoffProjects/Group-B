@@ -1,6 +1,6 @@
 package org.launchcode.PostIt.models.dto;
 
-public abstract class PostFormDTO {
+public abstract class  PostFormDTO {
     private String title;
     private Boolean anonymous;
 
