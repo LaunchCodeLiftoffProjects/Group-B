@@ -17,10 +17,12 @@
     <div class="navbar navbar-default navbar-fixed-top">
         <div class>
             <nav class="row">
-                <p class="nav-item col-sm-3"><a class="nav-link"th:href="@{/post}">Post</a></p>
-                <p class="nav-item col-sm-3"><a class="nav-link"th:href="@{/postImage}">Post an Image</a></p>
-                <p class="nav-item col-sm-3"><a class="nav-link"th:href="@{/search}">Search</a></p>
-                <p class="nav-item col-sm-3"><a class="nav-link"th:href="@{/logout}">Logout</a></p>
+                <p class="nav-item col-sm-2"><a class="nav-link"th:href="@{/}">Home</a></p>
+                <p class="nav-item col-sm-2"><a class="nav-link"th:href="@{/post}">Post</a></p>
+                <p class="nav-item col-sm-2"><a class="nav-link"th:href="@{/postImage}">Post an Image</a></p>
+                <p class="nav-item col-sm-2"><a class="nav-link"th:href="@{/MyPosts}">My Posts</a></p>
+                <p class="nav-item col-sm-2"><a class="nav-link"th:href="@{/search}">Search</a></p>
+                <p class="nav-item col-sm-2"><a class="nav-link"th:href="@{/logout}">Logout</a></p>
             </nav>
         </div>
     </div>
@@ -39,5 +41,43 @@
             crossorigin="anonymous"></script>
 </div>
 
+<div th:fragment="posts-display">
+    <th:block th:each="post : ${posts}">
+        <th:block th:if="${post.type == 'text'}">
+            <div th:if="${!post.anonymous}">
+                <div class="card">
+                    <h2 th:text="${post.title}" class="card-title"></h2>
+                    <p th:text="${post.body}" class="card-body"></p>
+                    <p th:text="${post.user.username}"></p>
+                    <p th:text="${post.getFormattedDate()}"></p>
+                </div>
+            </div>
+            <div th:if="${post.anonymous}">
+                <div class="card">
+                    <h2 th:text="${post.title}"></h2>
+                    <p th:text="${post.body}"></p>
+                    <p>Anonymously Posted</p>
+                </div>
+            </div>
+        </th:block>
+        <th:block th:if="${post.type == 'image'}">
+            <div  th:if="${!post.anonymous}">
+                <div class="card">
+                    <h2 th:text="${post.title}"></h2>
+                    <img th:src="${post.url}" class="card-img-top"/>
+                    <p th:text="${post.user.username}"></p>
+                </div>
+            </div>
+            <div th:if="${post.anonymous}">
+                <div class="card">
+                    <h2 th:text="${post.title}"></h2>
+                    <img th:src="${post.url}" class="card-img-top"/>
+                    <p>Anonymously Posted</p>
+                </div>
+            </div>
+        </th:block>
+
+    </th:block>
+</div>
 </body>
 </html>
