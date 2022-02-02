@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -29,10 +30,20 @@ public class MyPostsController {
     @GetMapping("MyPosts")
     public String getMyPosts(Model model, HttpSession session){
         int id = authController.getUserFromSession(session).getId();
+        /*
         List<AbstractPost> posts = new ArrayList<>();
 
         posts.addAll((Collection<? extends AbstractPost>) postRepository.findByUserId(id));
         posts.addAll((Collection<? extends AbstractPost>) imagePostRepository.findByUserId(id));
+        model.addAttribute("posts", posts);
+
+         */
+
+        List<AbstractPost> posts = new ArrayList<>();
+        posts.addAll((Collection<? extends AbstractPost>) postRepository.findByUserId(id));
+        posts.addAll((Collection<? extends AbstractPost>) imagePostRepository.findByUserId(id));
+
+        posts.sort(Comparator.naturalOrder());
         model.addAttribute("posts", posts);
         return "myPosts";
     }

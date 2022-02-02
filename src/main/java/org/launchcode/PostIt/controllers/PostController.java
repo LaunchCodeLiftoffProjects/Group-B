@@ -69,16 +69,19 @@ public class PostController {
         Optional<ImagePost> imagePost = imagePostRepository.findById(postId);
         if(textPost.isPresent()){
             model.addAttribute("post", textPost.get());
+            model.addAttribute("editButtons", false);
             if(imagePost.get().getUser() == authenticationController.getUserFromSession(session)){
                 model.addAttribute("editButtons", true);
             }
         } else if (imagePost.isPresent()){
             model.addAttribute("post", imagePost.get());
+            model.addAttribute("editButtons", false);
             if(imagePost.get().getUser() == authenticationController.getUserFromSession(session)){
                 model.addAttribute("editButtons", true);
             }
         } else{
             model.addAttribute("error", "No post found");
+            model.addAttribute("editButtons", false);
         }
         return "postView";
     }
