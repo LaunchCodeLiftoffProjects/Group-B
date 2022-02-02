@@ -84,6 +84,7 @@ public class PostController {
 
         if (newImagePost.getUrl().equals("error")){
             model.addAttribute("title", "ImagePost");
+            model.addAttribute("errorUrl","Must have Image to upload.");
             return "postImage";
         }else{
             imagePostRepository.save(newImagePost);
