@@ -30,21 +30,21 @@ public class MyPostsController {
     @GetMapping("MyPosts")
     public String getMyPosts(Model model, HttpSession session){
         int id = authController.getUserFromSession(session).getId();
-        /*
-        List<AbstractPost> posts = new ArrayList<>();
-
-        posts.addAll((Collection<? extends AbstractPost>) postRepository.findByUserId(id));
-        posts.addAll((Collection<? extends AbstractPost>) imagePostRepository.findByUserId(id));
-        model.addAttribute("posts", posts);
-
-         */
 
         List<AbstractPost> posts = new ArrayList<>();
-        posts.addAll((Collection<? extends AbstractPost>) postRepository.findByUserId(id));
-        posts.addAll((Collection<? extends AbstractPost>) imagePostRepository.findByUserId(id));
+        posts.addAll((Collection<? extends AbstractPost>) postRepository.findAll());
+        posts.addAll((Collection<? extends AbstractPost>) imagePostRepository.findAll());
+
+        List<AbstractPost> myPosts = new ArrayList<>();
+        for(AbstractPost post : posts){
+            if(post.getUser().getId() == id){
+                myPosts.add(post);
+            }
+        }
+
 
         posts.sort(Comparator.naturalOrder());
-        model.addAttribute("posts", posts);
+        model.addAttribute("posts", myPosts);
         return "myPosts";
     }
 

@@ -70,7 +70,7 @@ public class PostController {
         if(textPost.isPresent()){
             model.addAttribute("post", textPost.get());
             model.addAttribute("editButtons", false);
-            if(imagePost.get().getUser() == authenticationController.getUserFromSession(session)){
+            if(textPost.get().getUser() == authenticationController.getUserFromSession(session)){
                 model.addAttribute("editButtons", true);
             }
         } else if (imagePost.isPresent()){

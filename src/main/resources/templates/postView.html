@@ -5,6 +5,7 @@
 <body>
 <div th:replace="fragments :: page-header"></div>
 <h3 th:text="${error}"></h3>
+<th:block th:if="${post != null}">
 <th:block th:if="${post.type == 'text'}">
     <div th:if="${!post.anonymous}">
         <div class="card">
@@ -42,6 +43,6 @@
         </div>
     </div>
 </th:block>
-
+</th:block>
 </body>
 </html>
