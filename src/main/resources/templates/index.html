@@ -8,31 +8,38 @@
 
 <div class="container body-content">
     <h2>Post it!</h2>
-    <a href="/post">Make a post</a>
     <div>
         <th:block th:each="post : ${posts}">
             <th:block th:if="${post.type == 'text'}">
                 <div th:if="${!post.anonymous}">
-                    <h2 th:text="${post.title}"></h2>
-                    <p th:text="${post.body}"></p>
+                    <div class="card">
+                    <h2 th:text="${post.title}" class="card-title"></h2>
+                    <p th:text="${post.body}" class="card-body"></p>
                     <p th:text="${post.user.username}"></p>
+                    </div>
                 </div>
+                <div class="card">
                 <div th:if="${post.anonymous}">
                     <h2 th:text="${post.title}"></h2>
                     <p th:text="${post.body}"></p>
                     <p>Anonymously Posted</p>
+                </div>
                 </div>
             </th:block>
             <th:block th:if="${post.type == 'image'}">
+                <div class="card">
                 <div th:if="${!post.anonymous}">
                     <h2 th:text="${post.title}"></h2>
-                    <img th:src="${post.url}"/>
+                    <img th:src="${post.url}" class="card-img-top"/>
                     <p th:text="${post.user.username}"></p>
                 </div>
+                </div>
                 <div th:if="${post.anonymous}">
+                    <div class="card">
                     <h2 th:text="${post.title}"></h2>
-                    <img th:src="${post.url}"/>
+                    <img th:src="${post.url}" class="card-img-top"/>
                     <p>Anonymously Posted</p>
+                    </div>
                 </div>
             </th:block>
 
@@ -41,6 +48,7 @@
 
 
 </div>
+<div th:replace="fragments :: boot-scripts"></div>
 
 </body>
 </html>
