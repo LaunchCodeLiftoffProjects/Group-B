@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body>
+<div th:replace="fragments :: page-header"></div>
+<h3 th:text="${error}"></h3>
+<th:block th:if="${post != null}">
+<th:block th:if="${post.type == 'text'}">
+    <div th:if="${!post.anonymous}">
+        <div class="card">
+            <h2 th:text="${post.title}" class="card-title"></h2>
+            <p th:text="${post.body}" class="card-body"></p>
+            <p th:text="${post.user.username}"></p>
+            <p th:text="${post.getFormattedDate()}"></p>
+            <div th:replace="fragments :: editButtons"></div>
+        </div>
+    </div>
+    <div class="card">
+        <div th:if="${post.anonymous}">
+            <h2 th:text="${post.title}"></h2>
+            <p th:text="${post.body}"></p>
+            <p>Anonymously Posted</p>
+            <div th:replace="fragments :: editButtons"></div>
+        </div>
+    </div>
+</th:block>
+<th:block th:if="${post.type == 'image'}">
+    <div class="card">
+        <div th:if="${!post.anonymous}">
+            <h2 th:text="${post.title}"></h2>
+            <img th:src="${post.url}" class="card-img-top"/>
+            <p th:text="${post.user.username}"></p>
+            <div th:replace="fragments :: editButtons"></div>
+        </div>
+    </div>
+    <div th:if="${post.anonymous}">
+        <div class="card">
+            <h2 th:text="${post.title}"></h2>
+            <img th:src="${post.url}" class="card-img-top"/>
+            <p>Anonymously Posted</p>
+            <div th:replace="fragments :: editButtons"></div>
+        </div>
+    </div>
+</th:block>
+</th:block>
+</body>
+</html>

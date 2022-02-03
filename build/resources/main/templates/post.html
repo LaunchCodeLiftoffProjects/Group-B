@@ -10,11 +10,13 @@
                 <label>Title
                     <input type ="text" name="title" class="form-control">
                 </label>
+                <p class="errors" th:errors="${textPostFormDTO.title}"></p>
             </div>
             <div class="form-group">
                 <label>Body
                     <input type="text" name="body" class="form-control">
                 </label>
+                <p class="errors" th:errors="${textPostFormDTO.body}"></p>
             </div>
             <div class="form-group">
                 <label>Anonymous?

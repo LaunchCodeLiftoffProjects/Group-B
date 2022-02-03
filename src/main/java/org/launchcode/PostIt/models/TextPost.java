@@ -4,7 +4,8 @@ import javax.persistence.Entity;
 
 @Entity
 public class TextPost extends AbstractPost{
-    //add validation
+
+
     private String body;
 
     public TextPost(){

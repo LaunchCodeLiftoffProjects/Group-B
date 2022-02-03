@@ -2,8 +2,10 @@ package org.launchcode.PostIt.models;
 
 import javax.persistence.Entity;
 
+
 @Entity
 public class ImagePost extends AbstractPost{
+
     private String url;
 
     public ImagePost(){};

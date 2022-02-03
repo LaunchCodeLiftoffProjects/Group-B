@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Objects;
@@ -15,13 +17,16 @@ public abstract class AbstractPost implements Comparable<AbstractPost>{
     @GeneratedValue
     private int id;
 
-    //Add validation after merging branch that imports validation
+    @NotNull
+    @Size(min = 3, max = 140)
     private String title;
 
+    @NotNull
     private Date date;
 
     private Boolean anonymous;
 
+    @NotNull
     private String type;
 
     @ManyToOne
@@ -77,13 +82,17 @@ public abstract class AbstractPost implements Comparable<AbstractPost>{
         return type;
     }
 
+    public String getFormattedDate(){
+        return this.date.toString();
+    }
+
     public void setType(String type) {
         this.type = type;
     }
 
     @Override
     public int compareTo(AbstractPost post){
-        return getDate().compareTo(post.getDate());
+        return getDate().compareTo(post.getDate()) * -1;
     }
 
     @Override

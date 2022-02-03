@@ -1,5 +1,6 @@
 package org.launchcode.PostIt.models.dto;
 
+
 public class RegisterFormDTO extends LoginFormDTO {
 
     private String verifyPassword;
