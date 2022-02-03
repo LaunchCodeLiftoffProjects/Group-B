@@ -1,7 +1,11 @@
 .card {
     margin: 20px;
     padding: 20px;
+    background-color: #CCE6ED;
 }
 body {
-    background-color: #CCE6ED;
+    background-color: #A2DBDE;
+}
+.bg-light {
+    background-color: #a2dbde!important;
 }

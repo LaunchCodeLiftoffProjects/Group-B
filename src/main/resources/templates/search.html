@@ -2,19 +2,27 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body>
-    <div th:replace="fragments :: page-header"></div>
-    <div>
-        <h2>Search through Posts</h2>
+<div th:replace="fragments :: page-header"></div>
+<div>
+    <h2 class="text-center">Search through Posts</h2>
+</div>
+
+    <div class="container body-content">
+        <div class="row">
+            <div class="col-sm-12 d-flex justify-content-center">
+                <form method="post" action="search" class="form-inline">
+                    <div class="form-group">
+                        <input type="text" name="postSearch" class="form-control">
+                        <input type="submit" class="btn btn-info form-control">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <div th:replace="fragments :: posts-display"></div>
+        </div>
     </div>
 
-    <form method="post" action="search">
-        <div>
-            <input type="text" name="postSearch">
-            <input type="submit">
-        </div>
-    </form>
-<div>
-    <div th:replace="fragments :: posts-display"></div>
-</div>
 </body>
 </html>

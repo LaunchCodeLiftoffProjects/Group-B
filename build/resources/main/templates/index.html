@@ -3,18 +3,12 @@
 <head th:replace="fragments :: head">
 </head>
 <body>
-
 <div th:replace="fragments :: page-header"></div>
-
-<div class="container-fluid body-content">
-    <h2 class="text-center">Post it!</h2>
-    <div>
-        <div th:replace="fragments :: posts-display"></div>
-    </div>
-
-
+<h2 class="text-center">Post it!</h2>
+<div class="container body-content">
+    <div th:replace="fragments :: posts-display"></div>
 </div>
 <div th:replace="fragments :: boot-scripts"></div>
-
 </body>
+
 </html>

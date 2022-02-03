@@ -5,44 +5,62 @@
 <body>
 <div th:replace="fragments :: page-header"></div>
 <h3 th:text="${error}"></h3>
+<div class="container body-content">
+
+
 <th:block th:if="${post != null}">
+    <div class="row d-flex justify-content-center">
 <th:block th:if="${post.type == 'text'}">
-    <div th:if="${!post.anonymous}">
+    <div th:if="${!post.anonymous}" class="col-sm-8">
         <div class="card">
-            <h2 th:text="${post.title}" class="card-title"></h2>
+            <h3 th:text="${post.title}" class="card-title"></h3>
             <p th:text="${post.body}" class="card-body"></p>
-            <p th:text="${post.user.username}"></p>
-            <p th:text="${post.getFormattedDate()}"></p>
+            <div class="row">
+                <p th:text="'Posted by: ' + ${post.user.username}" class="col-sm-6"></p>
+                <p th:text="${post.getFormattedDate()}" class="text-right col-sm-6"></p>
+            </div>
             <div th:replace="fragments :: editButtons"></div>
         </div>
     </div>
-    <div class="card">
-        <div th:if="${post.anonymous}">
-            <h2 th:text="${post.title}"></h2>
+    <div th:if="${post.anonymous}" class="col-sm-8">
+        <div class="card">
+            <h3 th:text="${post.title}" class="card-title"></h3>
             <p th:text="${post.body}"></p>
-            <p>Anonymously Posted</p>
+            <div class="row">
+                <p class="col-sm-6">Posted Anonymously</p>
+                <p th:text="${post.getFormattedDate()}" class="text-right col-sm-6"></p>
+            </div>
             <div th:replace="fragments :: editButtons"></div>
         </div>
     </div>
 </th:block>
 <th:block th:if="${post.type == 'image'}">
-    <div class="card">
-        <div th:if="${!post.anonymous}">
-            <h2 th:text="${post.title}"></h2>
-            <img th:src="${post.url}" class="card-img-top"/>
-            <p th:text="${post.user.username}"></p>
-            <div th:replace="fragments :: editButtons"></div>
-        </div>
-    </div>
-    <div th:if="${post.anonymous}">
+    <div th:if="${!post.anonymous}" class="col-sm-8">
         <div class="card">
-            <h2 th:text="${post.title}"></h2>
+            <h3 th:text="${post.title}" class="card-title"></h3>
             <img th:src="${post.url}" class="card-img-top"/>
-            <p>Anonymously Posted</p>
+            <div class="row">
+                <p th:text="'Posted by: ' + ${post.user.username}" class="col-sm-6"></p>
+                <p th:text="${post.getFormattedDate()}" class="text-right col-sm-6"></p>
+            </div>
+            <div th:replace="fragments :: editButtons"></div>
+        </div>
+    </div>
+    <div th:if="${post.anonymous}" class="col-sm-8">
+        <div class="card">
+            <h3 th:text="${post.title}" class="card-title"></h3>
+            <img th:src="${post.url}" class="card-img-top"/>
+            <div class="row">
+                <p class="col-sm-6">Posted Anonymously</p>
+                <p th:text="${post.getFormattedDate()}" class="text-right col-sm-6"></p>
+            </div>
             <div th:replace="fragments :: editButtons"></div>
         </div>
     </div>
 </th:block>
+    </div>
 </th:block>
+
+</div>
 </body>
 </html>

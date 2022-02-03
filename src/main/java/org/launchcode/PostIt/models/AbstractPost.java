@@ -7,6 +7,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Objects;
@@ -83,7 +84,10 @@ public abstract class AbstractPost implements Comparable<AbstractPost>{
     }
 
     public String getFormattedDate(){
-        return this.date.toString();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        String retDate = dateFormat.format(this.date);
+
+        return retDate;
     }
 
     public void setType(String type) {
