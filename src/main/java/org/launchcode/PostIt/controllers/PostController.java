@@ -111,4 +111,20 @@ public class PostController {
         }
         return "postView";
     }
+    @GetMapping("postDelete/{postId}")
+    public String deletePost(@PathVariable int postId, HttpSession session){
+        Optional<TextPost> textPost = postRepository.findById(postId);
+        Optional<ImagePost> imagePost = imagePostRepository.findById(postId);
+        if(textPost.isPresent()){
+            if(textPost.get().getUser() == authenticationController.getUserFromSession(session)){
+                postRepository.deleteById(postId);
+            }
+        }
+        if(imagePost.isPresent()){
+            if(imagePost.get().getUser() == authenticationController.getUserFromSession(session)){
+                imagePostRepository.deleteById(postId);
+            }
+        }
+        return "redirect:http://localhost:8080/MyPosts";
+    }
 }
