@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Page</title>
+</head>
+<body>
+    <div th:replace="fragments :: page-header"></div>
+
+    <div class="container body-content">
+        <h2>Edit a Post</h2>
+            <form method="post">
+                    <div class="form-group">
+                        <label>Title
+                            <input type="text" th:value="${post.title}" name="newTitle" class="form-control">
+                        </label>
+                    </div>
+                    <div th:if="${post.type == 'text'}">
+                        <div class="form-group">
+                            <label>Body
+                                <input type="text" th:value="${post.body}" name="newBody" class="form-control">
+                            </label>
+                        </div>
+                    </div>
+                    <div th:if="${post.type == 'image'}">
+                        <img th:src="${post.url}"/>
+                    </div>
+                    <div class="form-group">
+                        <div th:if="${post.anonymous} == false">
+                            <label>Anonymous?
+                                <input type="checkbox" name="newAnonymousFalse" class="form-control">
+                            </label>
+                        </div>
+                        <div th:if="${post.anonymous}">
+                            <label>Anonymous?
+                                <input type="checkbox" name="newAnonymousTrue" class="form-control" checked>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Post" class="btn btn-success">
+                    </div>
+            </form>
+    </div>
+    <div>
+        <p th:text="${errorMessage}"></p>
+    </div>
+
+</body>
+</html>
