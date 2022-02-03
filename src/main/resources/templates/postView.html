@@ -15,7 +15,7 @@
             <p th:text="${post.getFormattedDate()}"></p>
             <th:block th:if="${editButtons}">
                 <a href="">Edit</a>
-                <a href="">Delete</a>
+                <a class="btn btn-danger" th:href="@{/postDelete/{id}(id=${post.id})}">Delete</a>
             </th:block>
         </div>
     </div>
