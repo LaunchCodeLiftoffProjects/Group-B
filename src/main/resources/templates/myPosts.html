@@ -4,7 +4,9 @@
 </head>
 <body>
 <div th:replace="fragments :: page-header"></div>
-<div th:replace="fragments :: posts-display"></div>
+<div class="container body-content">
+    <div th:replace="fragments :: posts-display"></div>
+</div>
 <div th:replace="fragments :: boot-scripts"></div>
 </body>
 
