@@ -3,8 +3,12 @@
     <head th:replace="fragments :: head">
     </head>
     <body>
+    <div class="container-fluid">
         <div th:replace="fragments :: page-header"></div>
-        <h3>Make a Post</h3>
+        <div class="text-center">
+            <h3>Make a Post</h3>
+        </div>
+        <div class="col-sm-12 d-flex justify-content-center">
         <form method="post">
             <div class="form-group">
                 <label>Title
@@ -19,13 +23,22 @@
                 <p class="errors" th:errors="${textPostFormDTO.body}"></p>
             </div>
             <div class="form-group">
-                <label>Anonymous?
-                    <input type="checkbox" name ="anonymous" class="form-control">
-                </label>
+                <div class="row">
+                    <p class="col-sm-6">Anonymous:</p>
+                        <input type="checkbox" name ="anonymous" class="form-control col-sm-6">
+
+                </div>
+
             </div>
-            <div class="form-group">
-                <input type="submit" value="Post" class="btn btn-success">
+            <div class="row">
+
+                <div class="form-group col-sm-12 text-center">
+                    <input type="submit" value="Post" class="btn btn-success">
+                </div>
             </div>
+
         </form>
+            </div>
+    </div>
     </body>
 </html>

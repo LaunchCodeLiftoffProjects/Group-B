@@ -13,8 +13,8 @@
 <body>
 
 <div th:fragment="page-header">
-    <header class="container">
-    <div class="navbar navbar-default navbar-fixed-top">
+    <header class="container-fluid">
+    <div class="navbar navbar-default navbar-fixed-top d-flex justify-content-center">
         <div class>
             <nav class="row">
                 <p class="nav-item col-sm-2"><a class="nav-link"th:href="@{/}">Home</a></p>
@@ -81,7 +81,7 @@
 </div>
 <div th:fragment="editButtons">
     <th:block th:if="${editButtons}">
-        <a th:href="@{/edit/{id}(id=${post.id})}">Edit</a>
+        <a class="btn btn-success"th:href="@{/edit/{id}(id=${post.id})}">Edit</a>
         <a class="btn btn-danger" th:href="@{/postDelete/{id}(id=${post.id})}">Delete</a>
     </th:block>
 </div>
