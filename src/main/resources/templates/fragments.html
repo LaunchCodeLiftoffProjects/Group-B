@@ -46,7 +46,7 @@
         <th:block th:if="${post.type == 'text'}">
             <div th:if="${!post.anonymous}">
                 <div class="card">
-                    <h2 th:text="${post.title}" class="card-title"></h2>
+                    <a th:text="${post.title}" th:href="@{/post/{id}(id=${post.id})}"class="card-title"></a>
                     <p th:text="${post.body}" class="card-body"></p>
                     <p th:text="${post.user.username}"></p>
                     <p th:text="${post.getFormattedDate()}"></p>
@@ -54,7 +54,7 @@
             </div>
             <div th:if="${post.anonymous}">
                 <div class="card">
-                    <h2 th:text="${post.title}"></h2>
+                    <a th:text="${post.title}" th:href="@{/post/{id}(id=${post.id})}"class="card-title"></a>
                     <p th:text="${post.body}"></p>
                     <p>Anonymously Posted</p>
                 </div>
@@ -63,20 +63,26 @@
         <th:block th:if="${post.type == 'image'}">
             <div  th:if="${!post.anonymous}">
                 <div class="card">
-                    <h2 th:text="${post.title}"></h2>
+                    <a th:text="${post.title}" th:href="@{/post/{id}(id=${post.id})}"class="card-title"></a>
                     <img th:src="${post.url}" class="card-img-top"/>
                     <p th:text="${post.user.username}"></p>
                 </div>
             </div>
             <div th:if="${post.anonymous}">
                 <div class="card">
-                    <h2 th:text="${post.title}"></h2>
+                    <a th:text="${post.title}" th:href="@{/post/{id}(id=${post.id})}"class="card-title"></a>
                     <img th:src="${post.url}" class="card-img-top"/>
                     <p>Anonymously Posted</p>
                 </div>
             </div>
         </th:block>
 
+    </th:block>
+</div>
+<div th:fragment="editButtons">
+    <th:block th:if="${editButtons}">
+        <a href="">Edit</a>
+        <a class="btn btn-danger" th:href="@{/postDelete/{id}(id=${post.id})}">Delete</a>
     </th:block>
 </div>
 </body>

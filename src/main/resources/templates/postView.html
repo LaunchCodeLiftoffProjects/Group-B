@@ -13,10 +13,7 @@
             <p th:text="${post.body}" class="card-body"></p>
             <p th:text="${post.user.username}"></p>
             <p th:text="${post.getFormattedDate()}"></p>
-            <th:block th:if="${editButtons}">
-                <a href="">Edit</a>
-                <a class="btn btn-danger" th:href="@{/postDelete/{id}(id=${post.id})}">Delete</a>
-            </th:block>
+            <div th:replace="fragments :: editButtons"></div>
         </div>
     </div>
     <div class="card">
@@ -24,6 +21,7 @@
             <h2 th:text="${post.title}"></h2>
             <p th:text="${post.body}"></p>
             <p>Anonymously Posted</p>
+            <div th:replace="fragments :: editButtons"></div>
         </div>
     </div>
 </th:block>
@@ -33,6 +31,7 @@
             <h2 th:text="${post.title}"></h2>
             <img th:src="${post.url}" class="card-img-top"/>
             <p th:text="${post.user.username}"></p>
+            <div th:replace="fragments :: editButtons"></div>
         </div>
     </div>
     <div th:if="${post.anonymous}">
@@ -40,6 +39,7 @@
             <h2 th:text="${post.title}"></h2>
             <img th:src="${post.url}" class="card-img-top"/>
             <p>Anonymously Posted</p>
+            <div th:replace="fragments :: editButtons"></div>
         </div>
     </div>
 </th:block>
