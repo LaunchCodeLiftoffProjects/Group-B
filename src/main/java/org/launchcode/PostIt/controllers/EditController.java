@@ -75,6 +75,7 @@ public class EditController {
                 }
                 model.addAttribute("post", post);
             }
-        return "edit";
+            String redirectUrl = "redirect:http://localhost:8080/post/" + id;
+        return redirectUrl;
     }
 }
