@@ -16,26 +16,33 @@ public class ImgurAPI {
 
     public static String uploadImage(MultipartFile image) {
 
+        //Setting our strings up here
         String encodedImage = "";
         String imgUrl = "";
 
+        //Turns the image into a string that the Imgur api can understand
         try {
             encodedImage = multiEncodeFileToBase64Binary(image);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        //This makes the object that makes the request
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
+        //Formats the body of the request and adds the image
         MediaType mediaType = MediaType.parse("text/plain");
         RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
                 .addFormDataPart("image", encodedImage)
                 .build();
+        //builds the request using the formatted body and our client id
         Request request = new Request.Builder()
                 .url("https://api.imgur.com/3/image")
                 .method("POST", body)
                 .addHeader("Authorization", "Client-ID " + CLIENTID)
                 .build();
+        //This try block is the where the request is actually sent
         try {
+            //sends the request and saves the response in a Response object named response
             Response response = client.newCall(request).execute();
             String responseBody = response.body().string();
 
